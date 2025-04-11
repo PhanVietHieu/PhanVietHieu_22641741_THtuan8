@@ -1,0 +1,52 @@
+{
+    "orders": [
+        {
+            "name": "Elizabeth Lee",
+            "avatar": "https://randomuser.me/api/portraits/women/1.jpg",
+            "company": "AvatarSystems",
+            "value": 359,
+            "date": "10/07/2023",
+            "status": "New"
+        },
+        {
+            "name": "Carlos Garcia",
+            "avatar": "https://randomuser.me/api/portraits/men/2.jpg",
+            "company": "SmoozeShift",
+            "value": 747,
+            "date": "24/07/2023",
+            "status": "New"
+        },
+        {
+            "name": "Elizabeth Bailey",
+            "avatar": "https://randomuser.me/api/portraits/women/3.jpg",
+            "company": "Prime Time Telecom",
+            "value": 564,
+            "date": "08/08/2023",
+            "status": "In-progress"
+        },
+        {
+            "name": "Ryan Brown",
+            "avatar": "https://randomuser.me/api/portraits/men/4.jpg",
+            "company": "OmniTech Corporation",
+            "value": 541,
+            "date": "31/08/2023",
+            "status": "In-progress"
+        },
+        {
+            "name": "Ryan Young",
+            "avatar": "https://randomuser.me/api/portraits/women/5.jpg",
+            "company": "DataStream Inc.",
+            "value": 769,
+            "date": "01/05/2023",
+            "status": "Completed"
+        },
+        {
+            "name": "Hailey Adams",
+            "avatar": "https://randomuser.me/api/portraits/men/6.jpg",
+            "company": "FlowRush",
+            "value": 922,
+            "date": "10/06/2023",
+            "status": "Completed"
+        }
+    ]
+}

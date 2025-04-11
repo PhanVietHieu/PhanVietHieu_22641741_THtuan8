@@ -1,81 +1,282 @@
+/* Đặt container chính canh giữa màn hình và có chiều rộng cố định */
 .container {
+  max-width: 1200px;
+  margin: 20px auto;
   display: grid;
   grid-template-areas:
     "menu header"
     "menu content"
-    "footer footer";
-  grid-template-columns: 1fr 3fr;
-  gap: 5px;
-  background-color: #2196F3;
-  padding: 5px;
-  height: 700px;
-  width: 1000px;
+    "menu footer";
+  grid-template-columns: 200px 1fr;
+  background-color: #f4f6f8;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  min-height: 700px;
 }
 
+/* Các phần tử bên trong */
 .container>div {
-  background-color: rgba(255, 255, 255, 0.8);
-  padding: 10px;
+  padding: 20px;
+  background-color: white;
 }
 
+/* Header */
 .container>div.header {
-  display: flex;
-  background-color: rgb(254, 255, 255);
   grid-area: header;
-  height: 40px;
-  width: 800px;
-}
-
-.container>div.header .logo {
-  height: 30px;
   display: flex;
   align-items: center;
-  padding-top: 5px;
+  justify-content: space-between;
+  height: 60px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e0e0e0;
 }
 
+.header .logo {
+  height: 40px;
+}
 
-.container>div.header .input {
-
-  border-radius: 4px;
-  height: 25px;
-  width: 250px;
-  margin-top: 10px;
-  margin-left: 300px;
-
-  background-color: rgb(185, 186, 187);
-
+.header .input {
+  border-radius: 6px;
+  height: 35px;
+  width: 300px;
+  padding-left: 35px;
+  background-color: #f0f0f0;
   background-image: url('../src/img/Search.png');
-  background-size: 18px 18px;
-  background-position: 8px center;
+  background-size: 20px 20px;
+  background-position: 10px center;
   background-repeat: no-repeat;
-  box-sizing: border-box;
+  border: none;
 }
 
-.container>div.header .input::placeholder {
-  font-weight: bold;
-  padding-left: 25px;
+.header input::placeholder {
+  font-weight: 500;
 }
 
+/* Menu (Sidebar) */
 .container>div.menu {
   grid-area: menu;
-  width: 150px;
+  background-color: #fefefe;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 20px;
+  border-right: 1px solid #e0e0e0;
 }
 
-.container>div.menu a {
-  display: block;
-  /* Mỗi thẻ <a> sẽ chiếm toàn bộ dòng */
-  padding: 10px;
+.menu .logoMenu {
+  height: 40px;
+  margin-bottom: 20px;
+}
+
+.menu a {
   text-decoration: none;
+  color: #333;
+  padding: 10px 0;
+  font-weight: 500;
 }
 
+/* Nội dung */
 .container>div.content {
-  display: block;
   grid-area: content;
-  height: 530px;
+  background-color: #f9fbfd;
+  padding: 30px;
 }
 
+.overview-title {
+  font-size: 20px;
+  margin-bottom: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
+.icon-square {
+  font-size: 18px;
+  color: #ff4081;
+}
 
+/* Card Section */
+.overview-row {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.card-box {
+  background: #fff;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+  flex: 1;
+  text-align: left;
+}
+
+.card-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.card-value {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.card-change {
+  font-size: 12px;
+  color: green;
+  margin-top: 4px;
+}
+
+/* Report Section */
+.secB {
+  margin-top: 20px;
+}
+
+.report-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #ffffff;
+}
+
+.report-table th,
+.report-table td {
+  padding: 12px 16px;
+  text-align: left;
+}
+
+.report-table thead {
+  background-color: #f4f6f8;
+  font-size: 14px;
+  font-weight: 600;
+  color: #555;
+}
+
+.report-table tbody tr {
+  border-bottom: 1px solid #eee;
+  transition: background 0.2s ease;
+}
+
+.report-table tbody tr:hover {
+  background-color: #f5f5f5;
+}
+
+.customer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.customer img {
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+}
+
+.status {
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.status.new {
+  background-color: #e3f2fd;
+  color: #2196f3;
+}
+
+.status.in-progress {
+  background-color: #fff3cd;
+  color: #ffc107;
+}
+
+.status.completed {
+  background-color: #e8f5e9;
+  color: #4caf50;
+}
+
+/* Import/Export Buttons */
+.import-export-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+.import-export-buttons button {
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.import-export-buttons button:hover {
+  background-color: #f0f0f0;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: flex-end;
+  padding: 15px 0;
+  font-size: 14px;
+  color: #888;
+}
+
+/* Footer */
 .container>div.footer {
   grid-area: footer;
-  height: 70px;
+  background-color: #fafafa;
+  border-top: 1px solid #e0e0e0;
+  text-align: center;
+  padding: 15px;
+  font-size: 14px;
+  color: #999;
+}
+
+/* --- Report header (title + buttons) --- */
+.report-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 0 10px;
+}
+
+.report-header h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #333;
+  display: flex;
+  align-items: center;
+}
+
+.report-icon {
+  color: #e91e63;
+  margin-right: 8px;
+}
+
+/* --- Buttons for import/export --- */
+.report-actions .btn {
+  border: 1px solid #ccc;
+  background: white;
+  padding: 6px 14px;
+  margin-left: 10px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.report-actions .btn:hover {
+  background-color: #f3f3f3;
 }

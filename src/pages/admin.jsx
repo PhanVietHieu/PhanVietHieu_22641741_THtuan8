@@ -5,12 +5,22 @@ import { useEffect, useState } from 'react';
 export default function Admin() {
 
   const [cards, setCards] = useState([]);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     fetch("http://localhost:3001/overview")
       .then((res) => res.json())
       .then((data) => setCards(data))
       .catch((err) => console.error("Error fetching data:", err));
+  }, []);
+
+
+
+  useEffect(() => {
+    fetch("http://localhost:3002/orders")
+      .then(res => res.json())
+      .then(setData)
+      .catch(err => console.error(err));
   }, []);
 
   return (
@@ -52,7 +62,51 @@ export default function Admin() {
               ))}
             </div>
           </div>
-          <div className="secB"></div>
+          <div className="secB">
+            <div className="report-header">
+              <h3>
+                <i className="fas fa-file-alt report-icon"></i> Detailed report
+              </h3>
+              <div className="report-actions">
+                <button className="btn btn-outline">📥 Import</button>
+                <button className="btn btn-outline">📤 Export</button>
+              </div>
+            </div>
+            <table className="report-table">
+              <thead>
+                <tr>
+                  <th><input type="checkbox" /></th>
+                  <th>CUSTOMER NAME</th>
+                  <th>COMPANY</th>
+                  <th>ORDER VALUE</th>
+                  <th>ORDER DATE</th>
+                  <th>STATUS</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {data.map((order, index) => (
+                  <tr key={index}>
+                    <td><input type="checkbox" /></td>
+                    <td className="customer">
+                      <img src={order.avatar} alt="" />
+                      <span>{order.name}</span>
+                    </td>
+                    <td>{order.company}</td>
+                    <td>${order.value}</td>
+                    <td>{order.date}</td>
+                    <td>
+                      <span className={`status ${order.status.toLowerCase()}`}>
+                        {order.status}
+                      </span>
+                    </td>
+                    <td><i className="fa fa-pencil-alt"></i></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+
+          </div>
         </div>
         <div className="footer">
           <h4>Footer</h4>
