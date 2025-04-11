@@ -1,0 +1,81 @@
+.container {
+  display: grid;
+  grid-template-areas:
+    "menu header"
+    "menu content"
+    "footer footer";
+  grid-template-columns: 1fr 3fr;
+  gap: 5px;
+  background-color: #2196F3;
+  padding: 5px;
+  height: 700px;
+  width: 1000px;
+}
+
+.container>div {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 10px;
+}
+
+.container>div.header {
+  display: flex;
+  background-color: rgb(254, 255, 255);
+  grid-area: header;
+  height: 40px;
+  width: 800px;
+}
+
+.container>div.header .logo {
+  height: 30px;
+  display: flex;
+  align-items: center;
+  padding-top: 5px;
+}
+
+
+.container>div.header .input {
+
+  border-radius: 4px;
+  height: 25px;
+  width: 250px;
+  margin-top: 10px;
+  margin-left: 300px;
+
+  background-color: rgb(185, 186, 187);
+
+  background-image: url('../src/img/Search.png');
+  background-size: 18px 18px;
+  background-position: 8px center;
+  background-repeat: no-repeat;
+  box-sizing: border-box;
+}
+
+.container>div.header .input::placeholder {
+  font-weight: bold;
+  padding-left: 25px;
+}
+
+.container>div.menu {
+  grid-area: menu;
+  width: 150px;
+}
+
+.container>div.menu a {
+  display: block;
+  /* Mỗi thẻ <a> sẽ chiếm toàn bộ dòng */
+  padding: 10px;
+  text-decoration: none;
+}
+
+.container>div.content {
+  display: block;
+  grid-area: content;
+  height: 530px;
+}
+
+
+
+.container>div.footer {
+  grid-area: footer;
+  height: 70px;
+}
