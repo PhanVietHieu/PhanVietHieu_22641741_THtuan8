@@ -1,6 +1,5 @@
-/* Đặt container chính canh giữa màn hình và có chiều rộng cố định */
 .container {
-  max-width: 1200px;
+  max-width: 1300px;
   margin: 20px auto;
   display: grid;
   grid-template-areas:
@@ -242,7 +241,7 @@
   color: #999;
 }
 
-/* --- Report header (title + buttons) --- */
+
 .report-header {
   display: flex;
   justify-content: space-between;
@@ -264,7 +263,6 @@
   margin-right: 8px;
 }
 
-/* --- Buttons for import/export --- */
 .report-actions .btn {
   border: 1px solid #ccc;
   background: white;
@@ -279,4 +277,110 @@
 
 .report-actions .btn:hover {
   background-color: #f3f3f3;
+}
+
+.report-table {
+  width: 100%;
+  overflow-x: auto;
+}
+
+
+
+/*Css modal*/
+/* Modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal-content {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  width: 50%;
+  max-width: 500px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  animation: slide-in 0.3s ease-out;
+}
+
+/* Modal Header */
+.modal-content h2 {
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Input fields */
+.modal-content input,
+.modal-content select {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.modal-content label {
+  font-weight: 600;
+  margin-bottom: 5px;
+  display: block;
+}
+
+/* Buttons */
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.modal-actions button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s;
+}
+
+.modal-actions button:hover {
+  background-color: #ddd;
+}
+
+.modal-actions button:first-child {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.modal-actions button:last-child {
+  background-color: #f44336;
+  color: white;
+}
+
+/* Modal Close Button */
+.modal-content button[type="button"]:last-child {
+  background-color: #f44336;
+  color: white;
+}
+
+/* Modal Animation */
+@keyframes slide-in {
+  0% {
+    transform: translateY(-50%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
