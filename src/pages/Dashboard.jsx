@@ -5,48 +5,86 @@ export default function Dashboard() {
 
     const [cards, setCards] = useState([]);
     const [data, setData] = useState([]);
-    const [selectedOrder, setSelectedOrder] = useState(null);  // Để lưu order đang được chọn
-    const [modalOpen, setModalOpen] = useState(false); // Để kiểm soát việc hiển thị modal
+    const [selectedOrder, setSelectedOrder] = useState(null);
+    const [modalOpen, setModalOpen] = useState(false);
+    const [newOrder, setNewOrder] = useState({
+        name: '',
+        company: '',
+        value: '',
+        date: new Date().toISOString().split('T')[0],
+        status: 'Pending',
+    });
 
-    // Hàm để mở modal và chọn đơn hàng cần chỉnh sửa
-    const openModal = (order) => {
-        setSelectedOrder(order);
+    const openModal = (order = null) => {
+        if (order) {
+            setSelectedOrder(order);
+            setNewOrder({ ...order }); // Đặt lại thông tin đơn hàng đã chọn
+        } else {
+            setSelectedOrder(null); // Không có đơn hàng chọn để thêm mới
+            setNewOrder({
+                name: '',
+                company: '',
+                value: '',
+                date: new Date().toISOString().split('T')[0],
+                status: 'Pending',
+            });
+        }
         setModalOpen(true);
     };
 
-    // Hàm để đóng modal
+
     const closeModal = () => {
         setModalOpen(false);
         setSelectedOrder(null);
     };
 
-    // Hàm xử lý lưu dữ liệu chỉnh sửa (có thể gửi PUT request để lưu lại thay đổi)
-    const handleSave = () => {
-        if (!selectedOrder) return;
 
-        // Gửi PUT request để cập nhật trên server
-        fetch(`http://localhost:3002/orders/${selectedOrder.id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(selectedOrder),
-        })
-            .then((res) => res.json())
-            .then((updatedOrder) => {
-                // Cập nhật data trong state
-                setData((prevData) =>
-                    prevData.map((order) =>
-                        order.id === updatedOrder.id ? updatedOrder : order
-                    )
-                );
-                closeModal();
+    const handleSave = () => {
+        if (selectedOrder) {
+            // Cập nhật đơn hàng đã chọn
+            fetch(`http://localhost:3002/orders/${selectedOrder.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(selectedOrder),
             })
-            .catch((err) => {
-                console.error('Lỗi khi lưu order:', err);
-                alert("Không thể lưu đơn hàng. Hãy thử lại.");
-            });
+                .then((res) => res.json())
+                .then((updatedOrder) => {
+                    setData((prevData) =>
+                        prevData.map((order) =>
+                            order.id === updatedOrder.id ? updatedOrder : order
+                        )
+                    );
+                    closeModal();
+                })
+                .catch((err) => {
+                    console.error('Lỗi khi lưu order:', err);
+                    alert("Không thể lưu đơn hàng. Hãy thử lại.");
+                });
+        } else {
+            // Thêm mới đơn hàng
+            fetch('http://localhost:3002/orders', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newOrder),
+            })
+                .then((res) => res.json())
+                .then((addedOrder) => {
+                    setData((prevData) => [...prevData, addedOrder]);
+                    closeModal();
+                })
+                .catch((err) => {
+                    console.error('Lỗi khi thêm đơn hàng:', err);
+                    alert('Không thể thêm đơn hàng. Hãy thử lại.');
+                });
+        }
     };
+
+
+
     useEffect(() => {
         fetch("http://localhost:3001/overview")
             .then((res) => res.json())
@@ -62,6 +100,19 @@ export default function Dashboard() {
             .then(setData)
             .catch(err => console.error(err));
     }, []);
+
+    // useEffect(() => {
+    //     const saved = localStorage.getItem("orders");
+    //     if (saved) {
+    //         setData(JSON.parse(saved));
+    //     } else {
+    //         fetch("http://localhost:3002/orders")
+    //             .then(res => res.json())
+    //             .then(setData)
+    //             .catch(err => console.error(err));
+    //     }
+    // }, []);
+
 
     const columns = [
         {
@@ -150,7 +201,7 @@ export default function Dashboard() {
                                 <i className="fas fa-file-alt report-icon"></i> Detailed report
                             </h3>
                             <div className="report-actions">
-                                <button className="btn btn-outline">Import</button>
+                                <button className="btn btn-outline"> Import</button>
                                 <button className="btn btn-outline">Export</button>
                             </div>
                         </div>
@@ -168,9 +219,9 @@ export default function Dashboard() {
                 <div className="footer">
                     <h4>Footer</h4>
                 </div>
-            </div>
+            </div >
 
-            {/* Modal chỉnh sửa đơn hàng */}
+            /* Modal chỉnh sửa đơn hàng */
             {modalOpen && selectedOrder && (
                 <div className="modal">
                     <div className="modal-content">
@@ -216,7 +267,8 @@ export default function Dashboard() {
                         </form>
                     </div>
                 </div>
-            )}
+            )
+            }
         </>
     )
 }
